@@ -79,8 +79,9 @@ const scoringAlgorithms = [
 
 function scorerPrompt() {
   console.log("Which scoring algorithm would you like to use?");
-  for (let i = 0; scoringAlgorithms.length; i++) {
-    console.log(scoringAlgorithms[i].description);
+  //console.log(scoringAlgorithms);
+  for (let i = 0; i < scoringAlgorithms.length; i++) {
+    console.log(scoringAlgorithms[i].name);
   }
  let scoreChoice = input.question("Enter 0, 1, or 2:");
  return scoringAlgorithms[scoreChoice]; 
@@ -92,14 +93,17 @@ let newPointStructure;
 
 function runProgram() {
   let word = initialPrompt();
-  console.log(oldScrabbleScorer(word));
-  let oldScrabblePoints = oldScrabbleScorer(word);
-  console.log(oldScrabblePoints);
-  let simplePoints = simpleScore(word);
-  console.log(simplePoints);
-  let vowelBonusPoints = vowelBonusScore(word);
-  console.log(vowelBonusPoints);
+  // console.log(oldScrabbleScorer(word));
+  // let oldScrabblePoints = oldScrabbleScorer(word);
+  // console.log(oldScrabblePoints);
+  // let simplePoints = simpleScore(word);
+  // console.log(simplePoints);
+  // let vowelBonusPoints = vowelBonusScore(word);
+  // console.log(vowelBonusPoints);
   let scoreOptionFunction = scorerPrompt(); 
+  let score = scoreOptionFunction.scoreFunction(word);
+  console.log(`Score for ${word}: ${score}`);
+
 }
 
 // Don't write any code below this line //
