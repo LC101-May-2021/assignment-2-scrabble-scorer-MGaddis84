@@ -2,6 +2,8 @@
 
 const input = require("readline-sync");
 
+
+let newPointStructure = {};
 const oldPointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
   2: ['D', 'G'],
@@ -58,14 +60,15 @@ let vowelBonusScore = function (word) {
 }
 
 
-function scrabbleScore(word, newPointStructure) {
+function scrabbleScore(word) {
   let score = 0; 
    for (i = 0; i < word.length; i++) {
-     score = score + newPointStructure.word[i].toUpperCase();
+     score = score +Number(newPointStructure[word[i].toUpperCase()]);
      //let scrabbleScore = newPointStructure[item][i];
    }
-   return score;
+   
    console.log(`Score for '${word}': ${score}`); 
+   return score;
 }
 
 const scoringAlgorithms = [
@@ -90,24 +93,25 @@ function scorerPrompt() {
 }
 
 
-let newPointStructure = transform(oldPointStructure);
+
 
 function transform(oldPointStructure) {
     for (let item in oldPointStructure) {
+      //console.log(item);
       for (let i = 0; i < oldPointStructure[item].length; i++) {
-        let newPointStructure ={};
-        newPointStructure += oldPointStructure[item][i];
+        //let newPointStructure ={};
+        newPointStructure[oldPointStructure[item][i]] = item;
       }
-    }
-  return newPointStructure[item]; 
+    } 
 }
-objectName["new-key"] = propertyValue; // Does this need to go in transform function?  object?[newValue] = oldPointStructure[item][i];
+//objectName["new-key"] = propertyValue; // Does this need to go in transform function?  object?[newValue] = oldPointStructure[item][i];
 
 function runProgram() {
   let word = initialPrompt();
   let scoreOptionFunction = scorerPrompt(); 
+  transform(oldPointStructure);
+  //console.log(newPointStructure);
   let score = scoreOptionFunction.scoringFunction(word);
-  console.log(`Score for ${word}: ${score}`);
 }
 
 // Don't write any code below this line //
