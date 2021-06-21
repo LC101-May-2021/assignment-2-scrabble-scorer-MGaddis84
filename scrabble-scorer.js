@@ -22,11 +22,8 @@ const vowelBonusStructure = {
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
 	let letterPoints ="";
- 
-	for (let i = 0; i < word.length; i++) {
-    
-	  for (const pointValue in oldPointStructure) {
-     
+	for (let i = 0; i < word.length; i++) { 
+	  for (const pointValue in oldPointStructure) { 
 		 if (oldPointStructure[pointValue].includes(word[i])) {
 			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
 		 }
@@ -34,10 +31,7 @@ function oldScrabbleScorer(word) {
 	  }
 	}
 	return letterPoints;
- }
-
-// your job is to finish writing these functions and variables that we've named //
-// don't change the names or your program won't work as expected. //
+}
 
 function initialPrompt() {
   let greeting = input.question("Let's play some scrabble! Enter a word to score:");
@@ -63,7 +57,16 @@ let vowelBonusScore = function (word) {
   return letterPoints;
 }
 
-let scrabbleScore;
+
+function scrabbleScore(word, newPointStructure) {
+  let score = 0; 
+   for (i = 0; i < word.length; i++) {
+     score = score + newPointStructure.word[i].toUpperCase();
+     //let scrabbleScore = newPointStructure[item][i];
+   }
+   return score;
+   console.log(`Score for '${word}': ${score}`); 
+}
 
 const scoringAlgorithms = [
   {name: "simpleScore",
@@ -74,12 +77,11 @@ const scoringAlgorithms = [
   scoringFunction: vowelBonusScore},
   {name: "Scrabble",
   description: "The traditional scoring algorithm.",
-  scoringFunction: oldScrabbleScorer}
+  scoringFunction: scrabbleScore}
 ];
 
 function scorerPrompt() {
   console.log("Which scoring algorithm would you like to use?");
-  //console.log(scoringAlgorithms);
   for (let i = 0; i < scoringAlgorithms.length; i++) {
     console.log(scoringAlgorithms[i].name);
   }
@@ -95,28 +97,17 @@ function transform(oldPointStructure) {
       for (let i = 0; i < oldPointStructure[item].length; i++) {
         let newPointStructure ={};
         newPointStructure += oldPointStructure[item][i];
-        return newPointStructure[item]; 
       }
     }
+  return newPointStructure[item]; 
 }
-//console.log(item + oldPointStructure[item]);
-
-
-
+objectName["new-key"] = propertyValue; // Does this need to go in transform function?  object?[newValue] = oldPointStructure[item][i];
 
 function runProgram() {
   let word = initialPrompt();
-  // console.log(oldScrabbleScorer(word));
-  // let oldScrabblePoints = oldScrabbleScorer(word);
-  // console.log(oldScrabblePoints);
-  // let simplePoints = simpleScore(word);
-  // console.log(simplePoints);
-  // let vowelBonusPoints = vowelBonusScore(word);
-  // console.log(vowelBonusPoints);
   let scoreOptionFunction = scorerPrompt(); 
   let score = scoreOptionFunction.scoringFunction(word);
   console.log(`Score for ${word}: ${score}`);
-
 }
 
 // Don't write any code below this line //
@@ -133,4 +124,3 @@ module.exports = {
 	runProgram: runProgram,
 	scorerPrompt: scorerPrompt
 };
-
